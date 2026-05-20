@@ -28,9 +28,10 @@ class ChatState {
   }
 }
 
-/// Chat notifier
-class ChatNotifier extends StateNotifier<ChatState> {
-  ChatNotifier() : super(const ChatState());
+/// Chat notifier - Riverpod 3 Notifier API
+class ChatNotifier extends Notifier<ChatState> {
+  @override
+  ChatState build() => const ChatState();
 
   Future<void> sendMessage(String content, {String character = 'default', String provider = 'gemini'}) async {
     if (content.trim().isEmpty) return;
@@ -53,7 +54,6 @@ class ChatNotifier extends StateNotifier<ChatState> {
       final systemPrompt = AppConstants.characterPrompts[character] ?? AppConstants.characterPrompts['default']!;
 
       final history = state.messages
-          .where((m) => !m.isLoading)
           .map((m) => {
                 'role': m.isUser ? 'user' : 'assistant',
                 'content': m.content,
@@ -92,12 +92,8 @@ class ChatNotifier extends StateNotifier<ChatState> {
   }
 }
 
-extension on ChatMessage {
-  bool get isLoading => false;
-}
-
 /// Chat provider
-final chatProvider = StateNotifierProvider<ChatNotifier, ChatState>((ref) {
+final chatProvider = NotifierProvider<ChatNotifier, ChatState>(() {
   return ChatNotifier();
 });
 

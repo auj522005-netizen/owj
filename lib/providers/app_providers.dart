@@ -8,12 +8,13 @@ final sharedPreferencesProvider = FutureProvider<SharedPreferences>((ref) async 
 });
 
 /// Provider for selected AI provider
-final selectedProviderProvider = StateNotifierProvider<SelectedProviderNotifier, String>((ref) {
+final selectedProviderProvider = NotifierProvider<SelectedProviderNotifier, String>(() {
   return SelectedProviderNotifier();
 });
 
-class SelectedProviderNotifier extends StateNotifier<String> {
-  SelectedProviderNotifier() : super('gemini');
+class SelectedProviderNotifier extends Notifier<String> {
+  @override
+  String build() => 'gemini';
 
   Future<void> loadSaved() async {
     final prefs = await SharedPreferences.getInstance();
@@ -28,12 +29,13 @@ class SelectedProviderNotifier extends StateNotifier<String> {
 }
 
 /// Provider for selected character
-final selectedCharacterProvider = StateNotifierProvider<SelectedCharacterNotifier, String>((ref) {
+final selectedCharacterProvider = NotifierProvider<SelectedCharacterNotifier, String>(() {
   return SelectedCharacterNotifier();
 });
 
-class SelectedCharacterNotifier extends StateNotifier<String> {
-  SelectedCharacterNotifier() : super('default');
+class SelectedCharacterNotifier extends Notifier<String> {
+  @override
+  String build() => 'default';
 
   Future<void> loadSaved() async {
     final prefs = await SharedPreferences.getInstance();
@@ -48,12 +50,13 @@ class SelectedCharacterNotifier extends StateNotifier<String> {
 }
 
 /// Provider for TTS enabled state
-final ttsEnabledProvider = StateNotifierProvider<TTSEnabledNotifier, bool>((ref) {
+final ttsEnabledProvider = NotifierProvider<TTSEnabledNotifier, bool>(() {
   return TTSEnabledNotifier();
 });
 
-class TTSEnabledNotifier extends StateNotifier<bool> {
-  TTSEnabledNotifier() : super(false);
+class TTSEnabledNotifier extends Notifier<bool> {
+  @override
+  bool build() => false;
 
   Future<void> loadSaved() async {
     final prefs = await SharedPreferences.getInstance();
@@ -68,12 +71,13 @@ class TTSEnabledNotifier extends StateNotifier<bool> {
 }
 
 /// Provider for font size
-final fontSizeProvider = StateNotifierProvider<FontSizeNotifier, double>((ref) {
+final fontSizeProvider = NotifierProvider<FontSizeNotifier, double>(() {
   return FontSizeNotifier();
 });
 
-class FontSizeNotifier extends StateNotifier<double> {
-  FontSizeNotifier() : super(16.0);
+class FontSizeNotifier extends Notifier<double> {
+  @override
+  double build() => 16.0;
 
   Future<void> loadSaved() async {
     final prefs = await SharedPreferences.getInstance();
@@ -88,12 +92,13 @@ class FontSizeNotifier extends StateNotifier<double> {
 }
 
 /// Provider for onboarding status
-final onboardingDoneProvider = StateNotifierProvider<OnboardingNotifier, bool>((ref) {
+final onboardingDoneProvider = NotifierProvider<OnboardingNotifier, bool>(() {
   return OnboardingNotifier();
 });
 
-class OnboardingNotifier extends StateNotifier<bool> {
-  OnboardingNotifier() : super(false);
+class OnboardingNotifier extends Notifier<bool> {
+  @override
+  bool build() => false;
 
   Future<void> loadSaved() async {
     final prefs = await SharedPreferences.getInstance();

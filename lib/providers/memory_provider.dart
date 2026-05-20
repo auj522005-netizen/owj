@@ -26,11 +26,12 @@ class MemoryState {
   }
 }
 
-/// Memory notifier
-class MemoryNotifier extends StateNotifier<MemoryState> {
-  final String userId;
+/// Memory notifier - Riverpod 3 Notifier API
+class MemoryNotifier extends Notifier<MemoryState> {
+  @override
+  MemoryState build() => const MemoryState();
 
-  MemoryNotifier(this.userId) : super(const MemoryState());
+  String get userId => 'owj_user';
 
   Future<void> loadMemories() async {
     state = state.copyWith(isLoading: true, error: null);
@@ -62,6 +63,6 @@ class MemoryNotifier extends StateNotifier<MemoryState> {
 }
 
 /// Memory provider
-final memoryProvider = StateNotifierProvider<MemoryNotifier, MemoryState>((ref) {
-  return MemoryNotifier('owj_user');
+final memoryProvider = NotifierProvider<MemoryNotifier, MemoryState>(() {
+  return MemoryNotifier();
 });
