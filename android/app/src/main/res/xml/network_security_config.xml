@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<network-security-config>
+    <base-config cleartextTrafficPermitted="true">
+        <trust-anchors>
+            <certificates src="system" />
+        </trust-anchors>
+    </base-config>
+    <domain-config cleartextTrafficPermitted="true">
+        <domain includeSubdomains="true">api.groq.com</domain>
+        <domain includeSubdomains="true">api.cerebras.ai</domain>
+        <domain includeSubdomains="true">openrouter.ai</domain>
+        <domain includeSubdomains="true">open.bigmodel.cn</domain>
+        <domain includeSubdomains="true">api.elevenlabs.io</domain>
+        <domain includeSubdomains="true">api.mem0.ai</domain>
+        <domain includeSubdomains="true">api.tavily.com</domain>
+        <domain includeSubdomains="true">generativelanguage.googleapis.com</domain>
+    </domain-config>
+</network-security-config>
