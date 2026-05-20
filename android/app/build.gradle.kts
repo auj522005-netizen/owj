@@ -1,11 +1,12 @@
 plugins {
     id("com.android.application")
+    // The Flutter Gradle Plugin must be applied after the Android and Kotlin Gradle plugins.
     id("dev.flutter.flutter-gradle-plugin")
 }
 
 android {
-    namespace = "com.owj.owj_app"
-    compileSdk = 36
+    namespace = "com.owj.app"
+    compileSdk = flutter.compileSdkVersion
     ndkVersion = flutter.ndkVersion
 
     compileOptions {
@@ -14,22 +15,20 @@ android {
     }
 
     defaultConfig {
-        applicationId = "com.owj.owj_app"
-        minSdk = 24
-        targetSdk = 34
-        versionCode = 31
-        versionName = "3.1.0"
-        multiDexEnabled = true
+        // TODO: Specify your own unique Application ID (https://developer.android.com/studio/build/application-id.html).
+        applicationId = "com.owj.app"
+        // You can update the following values to match your application needs.
+        // For more information, see: https://flutter.dev/to/review-gradle-config.
+        minSdk = flutter.minSdkVersion
+        targetSdk = flutter.targetSdkVersion
+        versionCode = flutter.versionCode
+        versionName = flutter.versionName
     }
 
     buildTypes {
         release {
-            isMinifyEnabled = true
-            isShrinkResources = true
-            proguardFiles(
-                getDefaultProguardFile("proguard-android-optimize.txt"),
-                "proguard-rules.pro"
-            )
+            // TODO: Add your own signing config for the release build.
+            // Signing with the debug keys for now, so `flutter run --release` works.
             signingConfig = signingConfigs.getByName("debug")
         }
     }
@@ -43,8 +42,4 @@ kotlin {
 
 flutter {
     source = "../.."
-}
-
-dependencies {
-    implementation("androidx.multidex:multidex:2.0.1")
 }

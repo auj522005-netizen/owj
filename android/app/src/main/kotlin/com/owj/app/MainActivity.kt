@@ -1,4 +1,4 @@
-package com.owj.owj_app
+package com.owj.app
 
 import io.flutter.embedding.android.FlutterActivity
 
