@@ -14,6 +14,8 @@ import 'screens/about_screen.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
+  // Firebase init removed - not required for AI features
+  // Add Firebase.initializeApp() here if you set up google-services.json
   runApp(const ProviderScope(child: OWJApp()));
 }
 

@@ -33,11 +33,18 @@ class _SplashScreenState extends ConsumerState<SplashScreen> with SingleTickerPr
     );
 
     _controller.forward();
-    _navigateToNext();
+    _startNavigation();
   }
 
-  Future<void> _navigateToNext() async {
-    await ref.read(onboardingDoneProvider.notifier).loadSaved();
+  Future<void> _startNavigation() async {
+    // Load saved settings
+    try {
+      await ref.read(onboardingDoneProvider.notifier).loadSaved();
+    } catch (_) {
+      // Ignore errors - default to showing onboarding
+    }
+
+    // Wait for splash animation
     await Future.delayed(const Duration(seconds: 3));
 
     if (!mounted) return;
@@ -68,8 +75,8 @@ class _SplashScreenState extends ConsumerState<SplashScreen> with SingleTickerPr
           ),
         ),
         child: Center(
-          child: AnimatedBuilder(
-            animation: _controller,
+          child: ListenableBuilder(
+            listenable: _controller,
             builder: (context, child) {
               return Opacity(
                 opacity: _fadeAnimation.value,
